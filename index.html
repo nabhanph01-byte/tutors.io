@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tutors.io</title>
+
+<style>
+:root{
+  --bg:#f4f6ff;
+  --card:#ffffff;
+  --text:#1e1e2f;
+  --primary:#6c63ff;
+  --green:#00c853;
+  --header:#eceeff;
+}
+.dark{
+  --bg:#0f111a;
+  --card:#1c1f2b;
+  --text:#f3f4ff;
+  --header:#181b29;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:.6s;
+}
+
+/* NAV */
+nav{
+  background:var(--header);
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;top:0;
+}
+nav h1{color:var(--primary);}
+nav button{
+  margin-left:8px;
+  padding:8px 16px;
+  border:none;
+  border-radius:20px;
+  background:var(--primary);
+  color:#fff;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+nav button:hover{
+  transform:translateY(-3px);
+}
+
+/* HOME */
+.hero{
+  text-align:center;
+  padding:70px 15px;
+  animation:fade 1s ease;
+}
+.hero h2{font-size:2.6rem;}
+.hero p{max-width:600px;margin:15px auto;opacity:.85;}
+
+.icons{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  margin-top:40px;
+  flex-wrap:wrap;
+}
+.icon{
+  background:var(--card);
+  width:150px;
+  padding:25px;
+  border-radius:25px;
+  text-align:center;
+  cursor:pointer;
+  transition:.4s;
+  box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+.icon:hover{
+  transform:scale(1.08);
+}
+.icon span{font-size:3rem;}
+.icon p{margin-top:10px;font-weight:600;}
+
+section{display:none;padding:60px 15px;}
+.active{display:block;animation:fade .7s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(15px)}to{opacity:1}}
+
+/* TUTORS */
+.grid{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;}
+.card{
+  background:var(--card);
+  width:260px;
+  padding:25px;
+  border-radius:25px;
+  text-align:center;
+  transition:.4s;
+  box-shadow:0 15px 30px rgba(0,0,0,.18);
+}
+.card:hover{transform:translateY(-8px);}
+.avatar{
+  width:80px;height:80px;
+  border-radius:50%;
+  background:#aaa;
+  margin:auto;
+}
+.btn{
+  margin-top:10px;
+  padding:10px;
+  border-radius:15px;
+  cursor:pointer;
+  transition:.3s;
+}
+.book{background:var(--primary);color:#fff;}
+.paid{background:var(--green);color:#fff;}
+.btn:hover{transform:scale(1.05);}
+
+/* CHAT */
+.chatbox{
+  max-width:500px;
+  margin:auto;
+  background:var(--card);
+  border-radius:25px;
+  padding:20px;
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
+}
+.bothead{text-align:center;font-size:3rem;}
+.messages{
+  height:280px;
+  overflow-y:auto;
+  margin:15px 0;
+}
+.msg{
+  max-width:75%;
+  padding:10px 14px;
+  border-radius:18px;
+  margin-bottom:8px;
+  font-size:.9rem;
+}
+.user{
+  background:var(--primary);
+  color:#fff;
+  margin-left:auto;
+  border-bottom-right-radius:5px;
+}
+.bot{
+  background:#e5e5ea;
+  color:#000;
+  border-bottom-left-radius:5px;
+}
+.dark .bot{background:#2a2d3e;color:#fff;}
+.typing{
+  font-style:italic;
+  opacity:.7;
+}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:15px;
+  border:2px solid var(--primary);
+}
+
+/* ABOUT */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+.modal-box{
+  background:var(--card);
+  padding:30px;
+  border-radius:25px;
+  max-width:420px;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:12px;right:15px;
+  cursor:pointer;
+  font-size:1.4rem;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <h1>tutors.io</h1>
+  <div>
+    <button onclick="show('home')">Home</button>
+    <button onclick="openAbout()">About</button>
+    <button onclick="toggleDark()">🌙</button>
+  </div>
+</nav>
+
+<div id="home" class="hero active">
+  <h2>Trusted Tutors. Smart AI.</h2>
+  <p>Helping parents choose the best tutors with AI support.</p>
+  <div class="icons">
+    <div class="icon" onclick="show('tutors')"><span>✏️</span><p>Tutors</p></div>
+    <div class="icon" onclick="show('chat')"><span>🤖</span><p>Ask Liam</p></div>
+  </div>
+</div>
+
+<section id="tutors">
+<h2 style="text-align:center;margin-bottom:30px;">Our Tutors</h2>
+<div class="grid">
+  <div class="card">
+    <div class="avatar"></div>
+    <p><b>Mia</b></p>
+    <p>Education: 10th</p>
+    <p>$35 / month</p>
+    <div class="btn book" onclick="alert('Call 📞 9036064920')">Book</div>
+    <div class="btn paid" onclick="emailPay('Mia')">Paid</div>
+  </div>
+  <div class="card">
+    <div class="avatar"></div>
+    <p><b>Nick</b></p>
+    <p>Education: +2</p>
+    <p>$40 / month</p>
+    <div class="btn book" onclick="alert('Call 📞 +91 9448589553')">Book</div>
+    <div class="btn paid" onclick="emailPay('Nick')">Paid</div>
+  </div>
+</div>
+</section>
+
+<section id="chat">
+<div class="chatbox">
+  <div class="bothead">🤖</div>
+  <div class="messages" id="msgs"></div>
+  <input placeholder="Type a message..." onkeydown="if(event.key==='Enter') talk(this.value)">
+</div>
+</section>
+
+<div class="modal" id="about">
+<div class="modal-box">
+  <div class="close" onclick="closeAbout()">✕</div>
+  <h2>Hello 👋</h2>
+  <p>We are <b>Nabhan</b> and <b>Aidha</b>. This website helps parents find trusted tutors online.</p>
+</div>
+</div>
+
+<script>
+let asked=false,joke=0;
+const msgs=document.getElementById("msgs");
+
+function show(id){
+  document.querySelectorAll(".hero,section").forEach(e=>e.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  if(id==="chat" && !asked){
+    setTimeout(()=>bot("Hey 😊 I’m Liam. How are you today?"),600);
+    asked=true;
+  }
+}
+function toggleDark(){document.body.classList.toggle("dark")}
+function openAbout(){about.style.display="flex"}
+function closeAbout(){about.style.display="none"}
+function emailPay(n){location.href=`mailto:nabhanph01@gmail.com?subject=Payment Done&body=Paid for ${n}`}
+
+function user(t){msgs.innerHTML+=`<div class="msg user">${t}</div>`}
+function bot(t){
+  const typing=document.createElement("div");
+  typing.className="msg bot typing";
+  typing.innerText="Liam is typing...";
+  msgs.appendChild(typing);
+  msgs.scrollTop=msgs.scrollHeight;
+
+  setTimeout(()=>{
+    typing.remove();
+    msgs.innerHTML+=`<div class="msg bot">${t}</div>`;
+    msgs.scrollTop=msgs.scrollHeight;
+    speechSynthesis.speak(new SpeechSynthesisUtterance(t));
+  },800);
+}
+
+function talk(v){
+  if(!v)return;
+  user(v);
+  const m=v.toLowerCase();
+
+  if(m.includes("hi")||m.includes("hello")) bot("Hello! 😊 Nice to meet you.");
+  else if(m.includes("good")) bot("That’s great 😄 I’m glad!");
+  else if(m.includes("sad")||m.includes("depressed")) bot("I’m sorry 😢 I’m here with you.");
+  else if(m.includes("who are you")) bot("I’m Liam 🤖, created by Nabhan to help you.");
+  else if(m.includes("who made you")) bot("I was created by Nabhan and Aidha 💙.");
+  else if(m.includes("detailed")) bot("This website is a demo created by Nabhan for a competition in Kannur. It has home, about, dark mode, tutors and me — Liam 🤖 to guide you.");
+  else if(m.includes("website")) bot("This website helps parents find trusted tutors easily.");
+  else if(m.includes("i have a daughter")) bot("Mia is perfect for your daughter 😊");
+  else if(m.includes("son")) bot("Nick is a great option 👍");
+  else if(m.includes("+1")||m.includes("+2")) bot("Nick is best for +1 and +2.");
+  else if(m.includes("joke")){joke=1;bot("What did the door say to the other door? 😄")}
+  else if(joke===1 && m.includes("what")){joke=2;bot("Knock knock 😂")}
+  else if(joke===2 && m.includes("who")){joke=3;bot("Hawaie 😆")}
+  else if(joke===3){joke=0;bot("How are you? I’m good too! 😂")}
+  else bot("I’m here to help 😊 Ask me about tutors or the website.");
+}
+</script>
+
+</body>
+</html>
